@@ -1,6 +1,8 @@
 # New-York-Times-Custom-Android-Client
 Simple "The New York Times" api client written in Kotlin.
 
+The project is under construction. A little later, the documentation will be added
+
 The application is designed to demonstrate a different approach to navigating in the application relative to that used in the official client.
 
 The application uses the following libraries and frameworks:
