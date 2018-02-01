@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/img_bookmark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_bookmark_black" />
+
+    <ImageView
+        android:id="@+id/img_article_poster"
+        android:layout_width="104dp"
+        android:layout_height="104dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_launcher_background" />
+
+    <TextView
+        android:id="@+id/txt_article_headline"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/img_article_poster"
+        app:layout_constraintStart_toEndOf="@+id/img_bookmark"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Sworn to Serve and Protect Pets, and Their Humans" />
+
+    <TextView
+        android:id="@+id/txt_article_snippet"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:textSize="12sp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        app:layout_constraintEnd_toStartOf="@+id/img_article_poster"
+        app:layout_constraintStart_toStartOf="@+id/txt_article_headline"
+        app:layout_constraintTop_toBottomOf="@+id/txt_article_headline"
+        tools:text="Like a Humane Society with guns, handcuffs and badges, the animal police force in the Netherlands provides a mixture of animal protection and human social services." />
+
+    <TextView
+        android:id="@+id/txt_article_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/img_article_poster"
+        app:layout_constraintStart_toStartOf="@+id/txt_article_snippet"
+        tools:text="11.01.2018" />
+
+    <ImageView
+        android:id="@+id/img_share"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_bookmark"
+        app:srcCompat="@drawable/ic_share_black" />
+</android.support.constraint.ConstraintLayout>
