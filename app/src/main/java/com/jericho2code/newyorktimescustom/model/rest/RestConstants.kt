@@ -7,5 +7,5 @@ object RestConstants {
     const val API_ARCHIVE_V1 = "archive/v1"
     const val API_TOPSTORIES_V2 = "topstories/v2"
 
-    const val API_KEY = "" //  enter you key go to https://developer.nytimes.com/signup
+    const val API_KEY = "404ad5b31b374520b965c70032cee3c9" //  enter you key go to https://developer.nytimes.com/signup
 }

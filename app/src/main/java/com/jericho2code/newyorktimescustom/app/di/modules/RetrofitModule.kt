@@ -1,15 +1,18 @@
 package com.jericho2code.newyorktimescustom.app.di.modules
 
-import com.google.gson.*
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.jericho2code.newyorktimescustom.model.AppScope
-import com.jericho2code.newyorktimescustom.model.rest.GsonString2DateSerialization
+import com.jericho2code.newyorktimescustom.model.rest.GsonString2LocalDateTime
+import com.jericho2code.newyorktimescustom.model.rest.RestConstants
 import dagger.Module
 import dagger.Provides
+import org.threeten.bp.LocalDate
+import org.threeten.bp.LocalDateTime
+import org.threeten.bp.ZonedDateTime
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import com.jericho2code.newyorktimescustom.model.rest.RestConstants
-import java.util.*
 
 @Module
 open class RetrofitModule {
@@ -24,7 +27,7 @@ open class RetrofitModule {
     @Provides
     @AppScope
     open fun gson(): Gson  = GsonBuilder()
-                .registerTypeAdapter(Date::class.java, GsonString2DateSerialization())
+                .registerTypeAdapter(ZonedDateTime::class.java, GsonString2LocalDateTime())
                 .create()
 
 }

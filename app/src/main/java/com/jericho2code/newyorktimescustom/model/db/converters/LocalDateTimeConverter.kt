@@ -4,17 +4,18 @@ import android.arch.persistence.room.TypeConverter
 import com.google.gson.Gson
 import com.jericho2code.newyorktimescustom.toDate
 import com.jericho2code.newyorktimescustom.toStringWithTimeZone
-import java.util.*
+import org.threeten.bp.LocalDateTime
+import org.threeten.bp.ZonedDateTime
 
 /**
  * Created by Михаил on 31.01.2018.
  */
 
-class DateConverter {
+class LocalDateTimeConverter {
     val gson = Gson()
 
     @TypeConverter
-    fun fromString(value: String?): Date? {
+    fun fromString(value: String?): ZonedDateTime? {
         if (value == null) {
             return null
         }
@@ -22,7 +23,7 @@ class DateConverter {
     }
 
     @TypeConverter
-    fun fromList(value: Date?): String? {
+    fun fromList(value: ZonedDateTime?): String? {
         if (value == null) return null
         return value.toStringWithTimeZone()
     }

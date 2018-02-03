@@ -45,6 +45,7 @@ allprojects {
         photoview = "com.github.chrisbanes:PhotoView:2.1.3"
         discretescrollview = "com.yarolegovich:discrete-scrollview:1.3.0"
         databindingc = "com.android.databinding:compiler:3.0.1"
+        threetenabp = "com.jakewharton.threetenabp:threetenabp:1.0.5"
 
         junit = "junit:junit:4.12"
         supporttestrunner = "com.android.support.test:runner:1.0.1"

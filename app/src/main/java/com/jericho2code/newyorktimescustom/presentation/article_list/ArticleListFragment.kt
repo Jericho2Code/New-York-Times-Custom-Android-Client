@@ -14,6 +14,8 @@ import com.jericho2code.newyorktimescustom.model.entities.Article
 import kotlinx.android.synthetic.main.fragment_article_list.*
 import com.jericho2code.newyorktimescustom.app.di.modules.ContextModule
 import com.jericho2code.newyorktimescustom.app.di.modules.RoomModule
+import com.jericho2code.newyorktimescustom.openIntentOrShowErrorMessage
+import com.jericho2code.newyorktimescustom.shareMessage
 
 class ArticleListFragment : MvpAppCompatFragment(), ArticleListView {
 
@@ -55,7 +57,18 @@ class ArticleListFragment : MvpAppCompatFragment(), ArticleListView {
 
         val category = arguments.getString(CATEGORY)
 
-        adapter = ArticleAdapter(context)
+        adapter = ArticleAdapter(context, object : ArticleAdapter.OnArticleClickListener {
+            override fun onShareClick(item: Article) {
+                context.shareMessage(item.title + "\n" + item.shortUrl)
+            }
+
+            override fun onNoteClick(item: Article) {
+            }
+
+            override fun onArticleClick(item: Article) {
+                context.openIntentOrShowErrorMessage(item.shortUrl)
+            }
+        })
         layoutManager = LinearLayoutManager(context)
         dividerItemDecoration = DividerItemDecoration(article_list.context, layoutManager.orientation)
         article_list.layoutManager = layoutManager

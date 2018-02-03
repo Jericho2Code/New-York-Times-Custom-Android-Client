@@ -9,7 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.jericho2code.newyorktimescustom.GlideApp
 import com.jericho2code.newyorktimescustom.R
-import com.jericho2code.newyorktimescustom.model.entities.Bookmark
+import com.jericho2code.newyorktimescustom.model.entities.Article
 import com.jericho2code.newyorktimescustom.openIntentOrShowErrorMessage
 import com.jericho2code.newyorktimescustom.toDateWithTimeString
 
@@ -17,7 +17,7 @@ import com.jericho2code.newyorktimescustom.toDateWithTimeString
  * Created by Михаил on 01.02.2018.
  */
 class BookmarkAdapter(val context: Context) : RecyclerView.Adapter<BookmarkAdapter.BookmarkHolder>() {
-    var items: List<Bookmark>? = null
+    var items: List<Article>? = null
 
     override fun onBindViewHolder(holder: BookmarkHolder, position: Int) {
         val item = items?.get(position)
@@ -36,14 +36,16 @@ class BookmarkAdapter(val context: Context) : RecyclerView.Adapter<BookmarkAdapt
         private val snippetView: TextView = itemView.findViewById(R.id.txt_article_snippet)
         private val dateView: TextView = itemView.findViewById(R.id.txt_article_date)
         private val articleImage: ImageView = itemView.findViewById(R.id.img_article_poster)
+        private val shareImage: ImageView = itemView.findViewById(R.id.img_share)
 
-        fun bind(item: Bookmark, context: Context) {
+        fun bind(item: Article, context: Context) {
             titleView.text = item.title
             snippetView.text = item.abstract
-            dateView.text = item.publicationDate.toDateWithTimeString()
+            dateView.text = item.publicationDate!!.toDateWithTimeString()
+            val imageUrl  = item.multimedia?.find { it.format == "mediumThreeByTwo210" }?.url
 
             GlideApp.with(articleImage)
-                    .load(item.imageUrl)
+                    .load(imageUrl)
                     .into(articleImage)
 
             itemView.setOnClickListener { context.openIntentOrShowErrorMessage(item.shortUrl) }

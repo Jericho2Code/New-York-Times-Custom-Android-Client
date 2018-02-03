@@ -47,7 +47,7 @@ dependencies {
             rxjava2, cicerone, moxy,
             moxyandroid, moxyappcompat,
             room, roomrxjava2, photoview,
-            ktstdlib
+            ktstdlib, threetenabp
     ])
 
     compile(discretescrollview) {

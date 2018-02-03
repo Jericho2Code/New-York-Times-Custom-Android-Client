@@ -9,7 +9,10 @@ import android.view.ViewGroup
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.jericho2code.newyorktimescustom.R
-import com.jericho2code.newyorktimescustom.model.entities.Bookmark
+import com.jericho2code.newyorktimescustom.app.di.DaggerArticleListComponent
+import com.jericho2code.newyorktimescustom.app.di.modules.ContextModule
+import com.jericho2code.newyorktimescustom.app.di.modules.RoomModule
+import com.jericho2code.newyorktimescustom.model.entities.Article
 import kotlinx.android.synthetic.main.fragment_bookmark.*
 
 /**
@@ -22,6 +25,15 @@ class BookmarkListFragment: MvpAppCompatFragment(), BookmarkListView {
 
     @InjectPresenter
     lateinit var presenter: BookmarkListPresenter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        DaggerArticleListComponent.builder()
+                .contextModule(ContextModule(context))
+                .roomModule(RoomModule(this.activity.application))
+                .build()
+                .inject(presenter)
+    }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? =
@@ -44,10 +56,14 @@ class BookmarkListFragment: MvpAppCompatFragment(), BookmarkListView {
         presenter.loadBookmarks()
     }
 
-    override fun onBookmarkLoaded(bookmarks: List<Bookmark>) {
+    override fun onBookmarkLoaded(bookmarks: List<Article>) {
         adapter.items = bookmarks
         adapter.notifyDataSetChanged()
         bookmark_list.visibility = View.VISIBLE
         bookmark_progress.visibility = View.GONE
+    }
+
+    override fun onError() {
+
     }
 }

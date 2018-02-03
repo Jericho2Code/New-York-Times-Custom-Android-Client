@@ -21,4 +21,5 @@ open class RoomModule(application: Application){
     @Provides
     @AppScope
     open fun providesArticleDao() = db.articleDao()
+
 }

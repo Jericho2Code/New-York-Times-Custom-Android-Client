@@ -12,10 +12,10 @@ import javax.inject.Inject
 class ArticleListPresenter: MvpPresenter<ArticleListView>() {
 
     @Inject
-    lateinit var repository: ArticleRepository
+    lateinit var repositoryRepository: ArticleRepository
 
     fun loadDocs(category: String) {
-        repository.getArticleByCategory(category).subscribe(
+        repositoryRepository.getArticleByCategory(category).subscribe(
                 {
                     viewState.displayDoc(it.sortedByDescending{ it.publicationDate })
                 },

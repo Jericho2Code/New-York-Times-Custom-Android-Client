@@ -25,6 +25,9 @@ interface ArticleDao {
     @Query("SELECT * FROM articles WHERE shortUrl = :id")
     fun getArticle(id: String): Single<Article>
 
-    @Query("SELECT * FROM articles WHERE section = :category")
+    @Query("SELECT * FROM articles WHERE category = :category")
     fun getArticleByCategory(category: String): Single<List<Article>>
+
+    @Query("SELECT * FROM articles WHERE bookmark = 1")
+    fun getBookmarkedArticles(): Single<List<Article>>
 }

@@ -22,13 +22,22 @@ class ArticleRepository @Inject constructor(val articleApi: ArticleService, val 
             articleApi.getArticleByCategory(category, params)
                     .map { it.results!! }
                     .toObservable()
-                    .doOnNext { storeArticlesInDb(it) }
+                    .doOnNext { it.forEach { it.bookmark = true } }
+                    .doOnNext { storeArticlesInDb(category, it) }
                     .onErrorReturn{ loadArticlesFromDbByCategory(category).blockingSingle() }
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.computation())
 
-    private fun storeArticlesInDb(articles: List<Article>?) {
+    fun getBoormarks() = Observable.fromCallable { articleDao.getBookmarkedArticles() }
+            .map { it.blockingGet() }
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.computation())
+
+    private fun storeArticlesInDb(category: String, articles: List<Article>?) {
         if(articles != null) {
+            articles.forEach {
+                it.category = category
+            }
             Observable.fromCallable { articleDao.insertAll(articles) }
                     .subscribeOn(Schedulers.computation())
                     .subscribe(
@@ -43,6 +52,6 @@ class ArticleRepository @Inject constructor(val articleApi: ArticleService, val 
     }
 
     private fun loadArticlesFromDbByCategory(category: String) =
-        articleDao.getArticleByCategory(category.capitalize()).toObservable().onErrorReturn { emptyList() }
+        articleDao.getArticleByCategory(category).toObservable().onErrorReturn { emptyList() }
 
 }

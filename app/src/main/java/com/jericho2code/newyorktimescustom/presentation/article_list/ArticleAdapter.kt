@@ -1,8 +1,6 @@
 package com.jericho2code.newyorktimescustom.presentation.article_list
 
 import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -12,14 +10,15 @@ import android.widget.TextView
 import com.jericho2code.newyorktimescustom.GlideApp
 import com.jericho2code.newyorktimescustom.R
 import com.jericho2code.newyorktimescustom.model.entities.Article
-import com.jericho2code.newyorktimescustom.openIntentOrShowErrorMessage
 import com.jericho2code.newyorktimescustom.toDateWithTimeString
-import java.util.ArrayList
+import com.jericho2code.newyorktimescustom.toStringWithTimeZone
+import org.threeten.bp.ZonedDateTime
+import java.util.*
 
 /**
  * Created by Михаил on 29.01.2018.
  */
-class ArticleAdapter(val context: Context): RecyclerView.Adapter<ArticleAdapter.ArticleHolder>() {
+class ArticleAdapter(val context: Context, val changeListener: OnArticleClickListener): RecyclerView.Adapter<ArticleAdapter.ArticleHolder>() {
 
     var items = ArrayList<Article>()
 
@@ -29,7 +28,7 @@ class ArticleAdapter(val context: Context): RecyclerView.Adapter<ArticleAdapter.
     override fun getItemCount(): Int = items.size
 
     override fun onBindViewHolder(holder: ArticleHolder?, position: Int) {
-        holder?.bind(items[position], context)
+        holder?.bind(items[position], changeListener)
     }
 
 
@@ -38,8 +37,10 @@ class ArticleAdapter(val context: Context): RecyclerView.Adapter<ArticleAdapter.
         private val snippetView: TextView = itemView.findViewById(R.id.txt_article_snippet)
         private val dateView: TextView = itemView.findViewById(R.id.txt_article_date)
         private val articleImage: ImageView = itemView.findViewById(R.id.img_article_poster)
+        private val bookmarkImage: ImageView = itemView.findViewById(R.id.img_bookmark)
+        private val shareImage: ImageView = itemView.findViewById(R.id.img_share)
 
-        fun bind(item: Article, context: Context) {
+        fun bind(item: Article, listener: OnArticleClickListener) {
             titleView.text = item.title
             snippetView.text = item.abstract
             dateView.text = item.publicationDate?.toDateWithTimeString()
@@ -53,15 +54,19 @@ class ArticleAdapter(val context: Context): RecyclerView.Adapter<ArticleAdapter.
                         .into(articleImage)
                 articleImage.visibility = View.VISIBLE
             }
+            bookmarkImage.setBackgroundResource(
+                    if(item.bookmark == true) R.drawable.ic_bookmark_black else R.drawable.ic_bookmark_border_black
+            )
 
-            itemView.setOnClickListener { context.openIntentOrShowErrorMessage(item.url!!) }
+            shareImage.setOnClickListener { listener.onShareClick(item) }
+            itemView.setOnClickListener { listener.onArticleClick(item)}
         }
     }
 
     interface OnArticleClickListener {
-        fun onShareClick(url: String)
-        fun onNoteClick()
-        fun onArticleClick()
+        fun onShareClick(item: Article)
+        fun onNoteClick(item: Article)
+        fun onArticleClick(item: Article)
     }
 
 }
