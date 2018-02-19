@@ -1,5 +1,6 @@
 package com.jericho2code.newyorktimescustom.model
 
+import android.util.Log
 import com.jericho2code.newyorktimescustom.model.db.ArticleDao
 import com.jericho2code.newyorktimescustom.model.entities.Article
 import com.jericho2code.newyorktimescustom.model.rest.ArticleService
@@ -43,8 +44,7 @@ class ArticleRepository @Inject constructor(val articleApi: ArticleService, val 
                     .subscribe(
                             {},
                             {
-                                val ss = "s"
-                                ss
+                                Log.e("ArticleRepository", "storeArticlesInDb - error", it)
                             }
                     )
 

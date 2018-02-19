@@ -1,5 +1,6 @@
 package com.jericho2code.newyorktimescustom.presentation.article_list
 
+import android.util.Log
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.jericho2code.newyorktimescustom.model.ArticleRepository
@@ -20,8 +21,7 @@ class ArticleListPresenter: MvpPresenter<ArticleListView>() {
                     viewState.displayDoc(it.sortedByDescending{ it.publicationDate })
                 },
                 {
-                    val ss = "s"
-                    ss
+                    Log.e("ArticleListPresenter", "loadDocs - error", it)
                 }
         )
     }
