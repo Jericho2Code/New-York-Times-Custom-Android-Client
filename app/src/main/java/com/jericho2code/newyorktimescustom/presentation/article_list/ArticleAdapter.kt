@@ -37,7 +37,6 @@ class ArticleAdapter(val context: Context, val changeListener: OnArticleClickLis
         private val snippetView: TextView = itemView.findViewById(R.id.txt_article_snippet)
         private val dateView: TextView = itemView.findViewById(R.id.txt_article_date)
         private val articleImage: ImageView = itemView.findViewById(R.id.img_article_poster)
-        private val bookmarkImage: ImageView = itemView.findViewById(R.id.img_bookmark)
         private val shareImage: ImageView = itemView.findViewById(R.id.img_share)
 
         fun bind(item: Article, listener: OnArticleClickListener) {
@@ -54,9 +53,6 @@ class ArticleAdapter(val context: Context, val changeListener: OnArticleClickLis
                         .into(articleImage)
                 articleImage.visibility = View.VISIBLE
             }
-            bookmarkImage.setBackgroundResource(
-                    if(item.bookmark == true) R.drawable.ic_bookmark_black else R.drawable.ic_bookmark_border_black
-            )
 
             shareImage.setOnClickListener { listener.onShareClick(item) }
             itemView.setOnClickListener { listener.onArticleClick(item)}

@@ -23,13 +23,14 @@
 
     <ImageView
         android:id="@+id/img_article_poster"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:background="@color/colorText"
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/txt_article_date"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_article_headline" />
 
@@ -37,42 +38,38 @@
         android:id="@+id/txt_article_snippet"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/txt_article_date"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_article_poster"
+        app:layout_constraintStart_toEndOf="@+id/img_article_poster"
+        app:layout_constraintTop_toBottomOf="@+id/txt_article_headline"
         tools:text="Like a Humane Society with guns, handcuffs and badges, the animal police force in the Netherlands provides a mixture of animal protection and human social services." />
 
     <TextView
         android:id="@+id/txt_article_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_article_snippet"
         tools:text="11.01.2018" />
 
-    <ImageView
-        android:id="@+id/img_bookmark"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_article_snippet"
-        app:srcCompat="@drawable/ic_bookmark_border_black" />
 
     <ImageView
         android:id="@+id/img_share"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toStartOf="@+id/img_bookmark"
-        app:layout_constraintTop_toTopOf="@+id/img_bookmark"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/txt_article_date"
         app:srcCompat="@drawable/ic_share_black" />
 
 

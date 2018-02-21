@@ -10,7 +10,7 @@ import com.jericho2code.newyorktimescustom.R
 import com.jericho2code.newyorktimescustom.app.navigation.HasCicerone
 import com.jericho2code.newyorktimescustom.app.navigation.HasRouter
 import com.jericho2code.newyorktimescustom.presentation.ArticlePagerFragment
-import com.jericho2code.newyorktimescustom.presentation.bookmarklist.BookmarkListFragment
+import com.jericho2code.newyorktimescustom.presentation.search.SearchFragment
 import kotlinx.android.synthetic.main.activity_navigation.*
 import ru.kinoplan24.app.navigation.FrontContainer
 import ru.kinoplan24.app.navigation.Screens
@@ -23,7 +23,6 @@ class NavigationActivity: MvpAppCompatActivity(), HasRouter, HasCicerone {
     }
 
     val screens = listOf(Screens.ARTICLE_LISTS,
-            Screens.BOOKMARKS,
             Screens.SEARCH)
 
     val cicerone = screens.map { it to Cicerone.create() }.toMap()
@@ -35,13 +34,12 @@ class NavigationActivity: MvpAppCompatActivity(), HasRouter, HasCicerone {
 
     private fun screen2fragment(screen: String) = when(screen) {
         Screens.ARTICLE_LISTS -> ArticlePagerFragment()
-        Screens.BOOKMARKS -> BookmarkListFragment()
+        Screens.SEARCH -> SearchFragment()
         else -> Fragment()
     }
 
     private fun index2screen(id: Int = navigation.selectedItemId) = when(id) {
         R.id.navigation_home -> Screens.ARTICLE_LISTS
-        R.id.navigation_bookmark -> Screens.BOOKMARKS
         R.id.navigation_search -> Screens.SEARCH
         else -> throw IllegalStateException()
     }
